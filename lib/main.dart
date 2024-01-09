@@ -31,9 +31,10 @@ class _MyMovieAppState extends State<MyMovieApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Movie App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
@@ -58,7 +59,8 @@ class _MyMovieAppState extends State<MyMovieApp> {
             setState(() {
               _currentIndex = index;
             });
-          },
+            },
+          selectedItemColor: Colors.red,
         ),
       ),
     );
