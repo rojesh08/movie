@@ -26,4 +26,32 @@ class MovieService {
       throw Exception('Failed to load movies: $error');
     }
   }
+  Future<List<Movie>> searchMovies(String query) async {
+    try {
+      final Map<String, String> queryParams = {
+        'query_term': query,
+      };
+
+      final response =
+      await http.get(Uri.https('yts.mx', '/api/v2/list_movies.json', queryParams));
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+
+        if (data['status'] == 'ok') {
+          final List<dynamic> moviesData = data['data']['movies'];
+          final List<Movie> movies =
+          moviesData.map((item) => Movie.fromJson(item)).toList();
+          return movies;
+        } else {
+          throw Exception('API response does not indicate success');
+        }
+      } else {
+        throw Exception('Request failed with status: ${response.statusCode}');
+      }
+    } catch (error){
+      throw ('No Movies Found:');
+    }
+  }
 }
+

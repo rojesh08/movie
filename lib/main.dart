@@ -53,6 +53,7 @@ class _MyMovieAppState extends State<MyMovieApp> {
               icon: Icon(Icons.favorite),
               label: 'My Wishlist',
             ),
+
           ],
           currentIndex: _currentIndex,
           onTap: (index) {
