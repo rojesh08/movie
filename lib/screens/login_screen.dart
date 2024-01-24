@@ -5,7 +5,7 @@ import 'package:movieapp/screens/register_screen.dart';
 class LoginScreen extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
+  TextEditingController usernameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +19,23 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            TextField(
+              controller: usernameController,
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                labelText: 'Username',
+                labelStyle: const TextStyle(color: Colors.white),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.red),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
             TextField(
               controller: emailController,
               style: const TextStyle(color: Colors.white),
@@ -35,6 +52,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             const SizedBox(height: 16),
             TextField(
               controller: passwordController,
@@ -57,7 +75,7 @@ class LoginScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 if (emailController.text.isEmpty ||
-                    passwordController.text.isEmpty) {
+                    passwordController.text.isEmpty || usernameController.text.isEmpty) {
                   // Show a message if the text fields are empty
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
