@@ -4,14 +4,35 @@ import 'screens/home_screen.dart';
 import 'screens/movies_screen.dart';
 import 'screens/wishlist_screen.dart';
 import 'provider/movie_provider.dart';
+import 'package:movieapp/screens/onboarding_screen.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => MovieProvider(),
-      child: MyMovieApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MovieProvider()),
+      ],
+      child: MyApp(),
     ),
   );
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Replace the following line with your actual logic to check if onboarding is completed
+    bool hasCompletedOnboarding = false;
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Movie App',
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: hasCompletedOnboarding ? MyMovieApp() : MovieOnboardingScreen(),
+    );
+  }
 }
 
 class MyMovieApp extends StatefulWidget {
